@@ -1,46 +1,60 @@
-import styled from "styled-components";
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 const Header = () => (
-    <HeaderStyles>
-        <div>
-            <h1>
-                Where in the world?
-            </h1>
-            <span>
-                <i className="far fa-moon"></i>
-                <span>Dark Mode</span>
-            </span>
-        </div>
-    </HeaderStyles>
+  <HeaderStyles>
+    <div>
+      <Link to="/">
+        <button type="button" className="title-wrapper">
+          Where in the world?
+        </button>
+      </Link>
+      <span>
+        <i className="far fa-moon" />
+        <span>Dark Mode</span>
+      </span>
+    </div>
+  </HeaderStyles>
 );
 
 const HeaderStyles = styled.header`
-    background: var(--white);
-    box-shadow: 0 0 20px -2px hsl(0deg 0% 71%);
+  background: var(--white);
+  box-shadow: 0 0 20px -2px hsl(0deg 0% 71%);
 
-    div {
-        font-size: 1.1rem;
-        max-width: var(--maxWidth);
-        margin: 0 auto;
-        padding: 1.5rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+  & > div {
+    font-size: 1.2rem;
+    max-width: var(--maxWidth);
+    margin: 0 auto;
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-        h1 {
-            display: inline-block;
-        }
-
-        & > span {
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-        }
-
-        i {
-            margin-right: 5px;
-        }
+    button {
+      padding: 0;
+      background: none;
+      border: none;
+      font-size: 3rem;
+      font-weight: 700;
     }
+
+    & > span {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+    }
+
+    i {
+      margin-right: 5px;
+    }
+  }
+
+  @media screen and (min-width: 40rem) {
+    div {
+      font-size: 1.6rem;
+    }
+  }
 `;
 
 export default Header;

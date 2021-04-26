@@ -1,4 +1,4 @@
-import styled, {createGlobalStyle} from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
   html {
@@ -8,7 +8,7 @@ export const GlobalStyles = createGlobalStyle`
     --darkGray: hsl(0, 0%, 52%);             //(Light Mode Input)
     --veryLightGray: hsl(0, 0%, 98%);        // (Light Mode Background)
     --white: hsl(0, 0%, 100%);               //(DarkMode Text & Light Mode Elements)
-    --maxWidth: 1000px;
+    --maxWidth: 1200px;
     font-size: 62.5%;
   }
   *, *:before, *:after {
@@ -24,11 +24,14 @@ export const GlobalStyles = createGlobalStyle`
     line-height: 2;
     font-family: 'Nunito Sans', sans-serif;
   }
+  button {
+    font-family: 'Nunito Sans', sans-serif;
+    cursor: pointer;
+  }
 `;
-
 
 export const ContainerStyles = styled.div`
   max-width: var(--maxWidth);
   margin: 0 auto;
-  padding: 2.5rem;
+  padding: 3rem;
 `;
