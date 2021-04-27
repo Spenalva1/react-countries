@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import axios from 'axios';
 import { ChangeEvent, useEffect, useState } from 'react';
+import Select from 'react-select';
 import styled from 'styled-components';
 import { Country } from '../country.interface';
 import CountryComponent from './Country';
@@ -10,10 +11,20 @@ type filters = {
   region: string;
 };
 
+const options = [
+  { value: '', label: 'All Regions' },
+  { value: 'Africa', label: 'Africa' },
+  { value: 'Americas', label: 'Americas' },
+  { value: 'Asia', label: 'Asia' },
+  { value: 'Europe', label: 'Europe' },
+  { value: 'Oceania', label: 'Oceania' },
+  { value: 'Polar', label: 'Polar' },
+];
+
 const Countries = () => {
   const [filter, setFilters] = useState<filters>({
     search: '',
-    region: 'americas',
+    region: '',
   });
   const [countries, setCountries] = useState<Country[]>([]);
   const [countriesToDisplay, setCountriesToDisplay] = useState<Country[]>([]);
@@ -57,30 +68,26 @@ const Countries = () => {
   return (
     <CountriesStyles>
       <div className="filters">
-        <input
-          type="search"
-          name="search"
-          placeholder="Search for a country"
-          value={filter.search}
-          onChange={handleChange}
+        <div className="input-wrapper">
+          <i className="fas fa-search" />
+          <input
+            type="search"
+            name="search"
+            placeholder="Search for a country..."
+            value={filter.search}
+            onChange={handleChange}
+            autoComplete="off"
+          />
+        </div>
+        <Select
+          onChange={(e) => {
+            setFilters({
+              ...filter,
+              region: `${e?.value}`,
+            });
+          }}
+          options={options}
         />
-        <select
-          name="region"
-          id="region"
-          value={filter.region}
-          onChange={handleChange}
-        >
-          <option value="" disabled>
-            Filter by Region
-          </option>
-          <option value="">All Regions</option>
-          <option value="Africa">Africa</option>
-          <option value="Americas">Americas</option>
-          <option value="Asia">Asia</option>
-          <option value="Europe">Europe</option>
-          <option value="Oceania">Oceania</option>
-          <option value="Polar">Polar</option>
-        </select>
       </div>
       <div className="countries--list">
         {countriesToDisplay.length > 0 &&
@@ -94,10 +101,52 @@ const Countries = () => {
 
 const CountriesStyles = styled.div`
   .filters {
+    position: relative;
     margin-bottom: 4rem;
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 1fr;
     justify-content: space-between;
+
+    .input-wrapper {
+      box-shadow: 0 0 20px -2px hsl(0deg 0% 71%);
+      border-radius: 5px;
+      background: var(--white);
+      position: relative;
+      padding: 1rem 1rem 1rem 4rem;
+      margin-bottom: 4rem;
+
+      i {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--darkGray);
+      }
+
+      input {
+        width: 100%;
+        border: none;
+        color: var(--darkGray);
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    @media screen and (min-width: 40rem) {
+      grid-template-columns: 5fr 2fr;
+
+      .input-wrapper {
+        margin-bottom: 0;
+        justify-self: start;
+        width: 60%;
+      }
+
+      select {
+        align-self: stretch;
+      }
+    }
   }
 
   .countries--list {

@@ -34,7 +34,7 @@ const HeaderStyles = styled.header`
       padding: 0;
       background: none;
       border: none;
-      font-size: 3rem;
+      font-size: 1.9rem;
       font-weight: 700;
     }
 
@@ -53,6 +53,10 @@ const HeaderStyles = styled.header`
   @media screen and (min-width: 40rem) {
     div {
       font-size: 1.6rem;
+
+      button {
+        font-size: 3rem;
+      }
     }
   }
 `;
