@@ -108,7 +108,7 @@ const CountriesStyles = styled.div`
     justify-content: space-between;
 
     .input-wrapper {
-      box-shadow: 0 0 20px -2px hsl(0deg 0% 71%);
+      box-shadow: var(--bs);
       border-radius: 5px;
       background: var(--white);
       position: relative;

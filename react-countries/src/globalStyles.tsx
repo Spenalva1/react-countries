@@ -9,6 +9,7 @@ export const GlobalStyles = createGlobalStyle`
     --veryLightGray: hsl(0, 0%, 98%);        // (Light Mode Background)
     --white: hsl(0, 0%, 100%);               //(DarkMode Text & Light Mode Elements)
     --maxWidth: 1200px;
+    --bs: 0px 0px 25px -7px rgba(0, 0, 0, 0.25);
     font-size: 62.5%;
   }
   *, *:before, *:after {

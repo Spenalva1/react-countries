@@ -54,10 +54,10 @@ const CountryDetail = ({ match }: RouteChildrenProps<{ code: string }>) => {
     <div>
       <div className="back-button-wapper">
         <Link to="/">
-          <button type="button">
+          <BackButton type="button" className="back-button">
             <i className="fas fa-arrow-left" />
             Back
-          </button>
+          </BackButton>
         </Link>
       </div>
       {!country && loading && <p>loading</p>}
@@ -76,7 +76,7 @@ const CountryDetail = ({ match }: RouteChildrenProps<{ code: string }>) => {
                 </span>
                 <span>
                   <strong>Population: </strong>
-                  {country.population}
+                  {Number(country.population).toLocaleString()}
                 </span>
                 <span>
                   <strong>Region: </strong>
@@ -108,12 +108,16 @@ const CountryDetail = ({ match }: RouteChildrenProps<{ code: string }>) => {
             </div>
             {(borders.length && (
               <div className="borders">
-                <span>
-                  <strong>Border Countries:</strong>
-                </span>
+                <div>
+                  <span>
+                    <strong>Border Countries:</strong>
+                  </span>
+                </div>
                 {borders.map((border) => (
                   <BorderButtonStyles key={border.code}>
-                    <Link to={`/country/${border.code}`}>{border.name}</Link>
+                    <Link to={`/country/${border.code}`}>
+                      <a>{border.name}</a>
+                    </Link>
                   </BorderButtonStyles>
                 ))}
               </div>
@@ -125,16 +129,94 @@ const CountryDetail = ({ match }: RouteChildrenProps<{ code: string }>) => {
   );
 };
 
-const CountryDetailStyles = styled.div`
-  width: 100%;
+const BackButton = styled.button`
+  background: var(--white);
+  border: none;
+  padding: 1rem 2rem;
+  box-shadow: var(--bs);
+  font-weight: 600;
 
-  img {
-    width: 50px;
+  i {
+    margin-right: 0.75rem;
   }
 `;
 
-const BorderButtonStyles = styled.div`
-  background: red;
+const CountryDetailStyles = styled.div`
+  font-size: 1.6rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+
+  img {
+    width: 100%;
+    margin: 5rem 0 2rem 0;
+  }
+
+  h2 {
+    font-weight: 800;
+  }
+
+  .columns {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    .column {
+      margin-bottom: 2.5rem;
+
+      span {
+        display: block;
+
+        strong {
+          font-weight: 800;
+        }
+      }
+    }
+  }
+
+  .borders {
+    div:first-child {
+      width: 100%;
+      margin: 0;
+    }
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  @media screen and (min-width: 55rem) {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+
+    .flag-wrapper {
+      padding-right: 2rem;
+    }
+
+    .columns {
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .borders {
+      div:first-child {
+        width: auto;
+        margin-right: 1rem;
+      }
+    }
+  }
+`;
+
+const BorderButtonStyles = styled.button`
+  background: var(--white);
+  border: none;
+  padding: 1rem 2rem;
+  box-shadow: var(--bs);
+  font-weight: 600;
+
+  a {
+    text-decoration: none;
+    color: var(--veryDarkBlue);
+  }
 `;
 
 export default CountryDetail;

@@ -19,7 +19,7 @@ const Header = () => (
 
 const HeaderStyles = styled.header`
   background: var(--white);
-  box-shadow: 0 0 20px -2px hsl(0deg 0% 71%);
+  box-shadow: var(--bs);
 
   & > div {
     font-size: 1.2rem;

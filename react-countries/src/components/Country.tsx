@@ -8,7 +8,7 @@ type CountryProps = {
 };
 
 const CountryStyles = styled.div`
-  box-shadow: 0 0 20px 0px hsl(0deg 0% 71%);
+  box-shadow: var(--bs);
   display: flex;
   flex-direction: column;
   max-width: 27.5rem;
