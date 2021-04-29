@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { Country as CountryInterface } from '../country.interface';
+import { Theme, useTheme } from '../theme-context';
 
 type CountryProps = {
   country: CountryInterface;
@@ -12,7 +13,7 @@ const CountryStyles = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 27.5rem;
-  background: var(--white);
+  background: ${({ theme }: { theme: Theme }) => theme.elements};
   border-radius: 7px;
   overflow: hidden;
   cursor: pointer;
@@ -26,6 +27,7 @@ const CountryStyles = styled.div`
     flex-direction: column;
     padding: 2rem;
     padding-bottom: 3rem;
+    color: ${({ theme }: { theme: Theme }) => theme.text};
 
     h3 {
       font-weight: 900;
@@ -44,11 +46,12 @@ const CountryStyles = styled.div`
 
 const Country: FunctionComponent<CountryProps> = ({ country }) => {
   const history = useHistory();
+  const { theme } = useTheme();
   const handleClick = () => {
     history.push(`/country/${country.alpha3Code}`);
   };
   return (
-    <CountryStyles onClick={handleClick}>
+    <CountryStyles theme={theme} onClick={handleClick}>
       <img src={country.flag} alt={country.name} />
       <div className="details">
         <h3>{country.name}</h3>

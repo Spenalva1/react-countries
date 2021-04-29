@@ -1,12 +1,15 @@
+import { ThemeProvider } from './theme-context';
 import Router from './components/Router';
-import { GlobalStyles } from './globalStyles';
+import { Global } from './globalStyles';
 
 function App() {
   return (
-    <div className="App">
-      <GlobalStyles />
-      <Router />
-    </div>
+    <ThemeProvider>
+      <div className="App">
+        <Global />
+        <Router />
+      </div>
+    </ThemeProvider>
   );
 }
 

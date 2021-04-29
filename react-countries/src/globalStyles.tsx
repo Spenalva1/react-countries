@@ -1,6 +1,7 @@
 import styled, { createGlobalStyle } from 'styled-components';
+import { Theme, useTheme } from './theme-context';
 
-export const GlobalStyles = createGlobalStyle`
+const GlobalStyles = createGlobalStyle`
   html {
     --darkBlue: hsl(209, 23%, 22%);          //(Dark Mode Elements)
     --veryDarkBlue: hsl(207, 26%, 17%);      // (Dark Mode Background)
@@ -18,7 +19,7 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
   }
   body {
-    background: var(--veryLightGray);
+    background: ${({ theme }: { theme: Theme }) => theme.bg};
     padding: 0;
     margin: 0;
     font-size: 1.4rem;
@@ -30,6 +31,11 @@ export const GlobalStyles = createGlobalStyle`
     cursor: pointer;
   }
 `;
+
+export const Global = () => {
+  const { theme } = useTheme();
+  return <GlobalStyles theme={theme} />;
+};
 
 export const ContainerStyles = styled.div`
   max-width: var(--maxWidth);

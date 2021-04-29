@@ -4,10 +4,12 @@ import { useEffect, useState } from 'react';
 import { Link, RouteChildrenProps } from 'react-router-dom';
 import styled from 'styled-components';
 import { Country } from '../country.interface';
+import { Theme, useTheme } from '../theme-context';
 
 type BorderType = { name: string; code: string };
 
 const CountryDetail = ({ match }: RouteChildrenProps<{ code: string }>) => {
+  const { theme } = useTheme();
   const [country, setCountry] = useState<Country>();
   const [borders, setBorders] = useState<BorderType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -54,7 +56,7 @@ const CountryDetail = ({ match }: RouteChildrenProps<{ code: string }>) => {
     <div>
       <div className="back-button-wapper">
         <Link to="/">
-          <BackButton type="button" className="back-button">
+          <BackButton theme={theme} type="button" className="back-button">
             <i className="fas fa-arrow-left" />
             Back
           </BackButton>
@@ -62,7 +64,7 @@ const CountryDetail = ({ match }: RouteChildrenProps<{ code: string }>) => {
       </div>
       {!country && loading && <p>loading</p>}
       {country && (
-        <CountryDetailStyles>
+        <CountryDetailStyles theme={theme}>
           <div className="flag-wrapper">
             <img src={country.flag} alt={country.name} />
           </div>
@@ -114,7 +116,7 @@ const CountryDetail = ({ match }: RouteChildrenProps<{ code: string }>) => {
                   </span>
                 </div>
                 {borders.map((border) => (
-                  <BorderButtonStyles key={border.code}>
+                  <BorderButtonStyles theme={theme} key={border.code}>
                     <Link to={`/country/${border.code}`}>
                       <a>{border.name}</a>
                     </Link>
@@ -130,7 +132,8 @@ const CountryDetail = ({ match }: RouteChildrenProps<{ code: string }>) => {
 };
 
 const BackButton = styled.button`
-  background: var(--white);
+  background: ${({ theme }: { theme: Theme }) => theme.elements};
+  color: ${({ theme }: { theme: Theme }) => theme.text};
   border: none;
   padding: 1rem 2rem;
   box-shadow: var(--bs);
@@ -146,6 +149,7 @@ const CountryDetailStyles = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   width: 100%;
+  color: ${({ theme }: { theme: Theme }) => theme.text};
 
   img {
     width: 100%;
@@ -207,7 +211,7 @@ const CountryDetailStyles = styled.div`
 `;
 
 const BorderButtonStyles = styled.button`
-  background: var(--white);
+  background: ${({ theme }: { theme: Theme }) => theme.elements};
   border: none;
   padding: 1rem 2rem;
   box-shadow: var(--bs);
@@ -215,7 +219,7 @@ const BorderButtonStyles = styled.button`
 
   a {
     text-decoration: none;
-    color: var(--veryDarkBlue);
+    color: ${({ theme }: { theme: Theme }) => theme.text};
   }
 `;
 

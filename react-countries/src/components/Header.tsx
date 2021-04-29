@@ -1,24 +1,32 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Theme, useTheme } from '../theme-context';
 
-const Header = () => (
-  <HeaderStyles>
-    <div>
-      <Link to="/">
-        <button type="button" className="title-wrapper">
-          Where in the world?
-        </button>
-      </Link>
-      <span>
-        <i className="far fa-moon" />
-        <span>Dark Mode</span>
-      </span>
-    </div>
-  </HeaderStyles>
-);
+const Header = () => {
+  const { theme, toggleTheme } = useTheme();
+
+  return (
+    <HeaderStyles theme={theme}>
+      <div>
+        <Link to="/">
+          <button type="button" className="title-wrapper">
+            Where in the world?
+          </button>
+        </Link>
+        <span onClick={() => toggleTheme()}>
+          <i className="far fa-moon" />
+          <span>Dark Mode</span>
+        </span>
+      </div>
+    </HeaderStyles>
+  );
+};
 
 const HeaderStyles = styled.header`
-  background: var(--white);
+  background: ${({ theme }: { theme: Theme }) => theme.elements};
+  color: ${({ theme }: { theme: Theme }) => theme.text};
   box-shadow: var(--bs);
 
   & > div {
@@ -31,6 +39,7 @@ const HeaderStyles = styled.header`
     align-items: center;
 
     button {
+      color: ${({ theme }: { theme: Theme }) => theme.text};
       padding: 0;
       background: none;
       border: none;
