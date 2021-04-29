@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  ReactChildren,
-  ReactNode,
-  useContext,
-  useState,
-} from 'react';
+import React, { createContext, ReactNode, useContext, useState } from 'react';
 
 export const lightTheme = {
   mode: 'light',
