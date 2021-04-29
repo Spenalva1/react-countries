@@ -118,7 +118,7 @@ const CountryDetail = ({ match }: RouteChildrenProps<{ code: string }>) => {
                 {borders.map((border) => (
                   <BorderButtonStyles theme={theme} key={border.code}>
                     <Link to={`/country/${border.code}`}>
-                      <a>{border.name}</a>
+                      <span>{border.name}</span>
                     </Link>
                   </BorderButtonStyles>
                 ))}
@@ -134,6 +134,7 @@ const CountryDetail = ({ match }: RouteChildrenProps<{ code: string }>) => {
 const BackButton = styled.button`
   background: ${({ theme }: { theme: Theme }) => theme.elements};
   color: ${({ theme }: { theme: Theme }) => theme.text};
+  transition: background var(--themeTransition), color var(--themeTransition);
   border: none;
   padding: 1rem 2rem;
   box-shadow: var(--bs);
@@ -150,6 +151,7 @@ const CountryDetailStyles = styled.div`
   grid-template-columns: 1fr;
   width: 100%;
   color: ${({ theme }: { theme: Theme }) => theme.text};
+  transition: color var(--themeTransition);
 
   img {
     width: 100%;
@@ -212,6 +214,7 @@ const CountryDetailStyles = styled.div`
 
 const BorderButtonStyles = styled.button`
   background: ${({ theme }: { theme: Theme }) => theme.elements};
+  transition: background var(--themeTransition);
   border: none;
   padding: 1rem 2rem;
   box-shadow: var(--bs);
@@ -220,6 +223,7 @@ const BorderButtonStyles = styled.button`
   a {
     text-decoration: none;
     color: ${({ theme }: { theme: Theme }) => theme.text};
+    transition: color var(--themeTransition);
   }
 `;
 

@@ -11,6 +11,7 @@ const GlobalStyles = createGlobalStyle`
     --white: hsl(0, 0%, 100%);               //(DarkMode Text & Light Mode Elements)
     --maxWidth: 1200px;
     --bs: 0px 0px 25px -7px rgba(0, 0, 0, 0.25);
+    --themeTransition: 0.3s ease-in-out;
     font-size: 62.5%;
   }
   *, *:before, *:after {
@@ -20,6 +21,7 @@ const GlobalStyles = createGlobalStyle`
   }
   body {
     background: ${({ theme }: { theme: Theme }) => theme.bg};
+    transition: background var(--themeTransition);
     padding: 0;
     margin: 0;
     font-size: 1.4rem;

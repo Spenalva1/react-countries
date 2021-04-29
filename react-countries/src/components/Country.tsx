@@ -14,6 +14,7 @@ const CountryStyles = styled.div`
   flex-direction: column;
   max-width: 27.5rem;
   background: ${({ theme }: { theme: Theme }) => theme.elements};
+  transition: background var(--themeTransition);
   border-radius: 7px;
   overflow: hidden;
   cursor: pointer;
@@ -28,6 +29,7 @@ const CountryStyles = styled.div`
     padding: 2rem;
     padding-bottom: 3rem;
     color: ${({ theme }: { theme: Theme }) => theme.text};
+    transition: color var(--themeTransition);
 
     h3 {
       font-weight: 900;

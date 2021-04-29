@@ -27,6 +27,7 @@ const Header = () => {
 const HeaderStyles = styled.header`
   background: ${({ theme }: { theme: Theme }) => theme.elements};
   color: ${({ theme }: { theme: Theme }) => theme.text};
+  transition: background var(--themeTransition), color var(--themeTransition);
   box-shadow: var(--bs);
 
   & > div {
@@ -40,6 +41,7 @@ const HeaderStyles = styled.header`
 
     button {
       color: ${({ theme }: { theme: Theme }) => theme.text};
+      transition: color var(--themeTransition);
       padding: 0;
       background: none;
       border: none;
